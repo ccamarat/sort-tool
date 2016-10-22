@@ -1,0 +1,15 @@
+{
+  "name": "imagesort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "sortimages": "index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "2.15.1",
+    "yargs": "6.2.0"
+  }
+}
