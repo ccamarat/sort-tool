@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-node index",
-    "test": "babel-node \"./node_modules/jasmine/bin/jasmine.js\""
+    "lint": "eslint ./**/*.js --fix",
+    "test": "npm run lint && babel-node \"./node_modules/jasmine/bin/jasmine.js\""
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,12 @@
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-preset-es2015": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0"
+    "babel-preset-stage-0": "^6.16.0",
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jasmine": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1"
   }
 }

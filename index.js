@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import path from 'path';
 import yargs from 'yargs';
 import walk from './lib/walk';

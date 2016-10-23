@@ -1,5 +1,6 @@
-import * as async from '../../lib/async/async';
 import install from 'jasmine-es6/overrides/async';
+import * as async from '../../lib/async/async';
+
 install();
 
 describe('async', () => {
