@@ -8,7 +8,7 @@
     "lint": "eslint ./**/*.js --fix",
     "test:cover": "",
     "xxpretest": "npm run lint",
-    "test": "nyc --all ava"
+    "test": "nyc ava"
   },
   "ava": {
     "require": [
