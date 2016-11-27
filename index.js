@@ -2,16 +2,16 @@
 
 import path from 'path';
 import yargs from 'yargs';
-import walk from './lib/walk';
-import dump from './lib/dump';
+import {walk} from './lib/walk';
+import {dump} from './lib/dump';
 
 const args = yargs
-    .default('p', '../')
-    .default('o', 'sorted')
+    .default('p', './test-cases/input/')
+    .default('o', './test-cases/output/')
     .argv;
 
 const searchPath = path.join(__dirname, args.p);
-const outputPath = path.join(__dirname, args.p, args.o);
+const outputPath = path.join(__dirname, args.o);
 
 console.log(`Sorting ${searchPath} -> ${outputPath}`);
 
