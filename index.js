@@ -2,8 +2,8 @@
 
 import path from 'path';
 import yargs from 'yargs';
-import {walk} from './lib/walk';
-import {dump} from './lib/dump';
+import { walk } from './lib/walk';
+import { dump } from './lib/dump';
 
 const args = yargs
     .default('p', './test-cases/input/')

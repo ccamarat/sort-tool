@@ -1,12 +1,10 @@
-import install from 'jasmine-es6/overrides/async';
+import { describe, it, expect, sinon } from '../.test-env';
 import * as async from '../../lib/async/async';
-
-install();
 
 describe('async', () => {
     it('should define a couple functions', () => {
-        expect(async.asyncify).toBeDefined();
-        expect(async.asAsync).toBeDefined();
+        expect(async.asyncify).to.be.ok();
+        expect(async.asAsync).to.be.ok();
     });
 
     describe('asAsync', () => {
@@ -19,7 +17,7 @@ describe('async', () => {
 
             const result = await async.asAsync(dummy);
 
-            expect(result).toBe(42);
+            expect(result).to.equal(42);
         });
 
         it('should throw "failure" value async', async() => {
@@ -37,7 +35,7 @@ describe('async', () => {
                 result = e;
             }
 
-            expect(result).toBe(42);
+            expect(result).to.equal(42);
         });
 
         it('should pass through params to delegate', async() => {
@@ -46,14 +44,14 @@ describe('async', () => {
                     setTimeout(() => {
                         done(null, 42);
                     }, 50);
-                }
+                },
             };
 
-            const spy = spyOn(blah, 'dummy').and.callThrough();
+            const spy = sinon.spy(blah, 'dummy');
 
             await async.asAsync(spy, 1, 2, 3);
 
-            expect(spy).toHaveBeenCalledWith(1, 2, 3, jasmine.any(Function));
+            expect(spy.calledWith(1, 2, 3, sinon.match.func));
         });
     });
 
@@ -69,7 +67,7 @@ describe('async', () => {
 
             const result = await dummyAsync();
 
-            expect(result).toBe(42);
+            expect(result).to.equal(42);
         });
 
         it('should throw "failure" value async', async() => {
@@ -82,12 +80,12 @@ describe('async', () => {
             let result;
             const dummyAsync = async.asyncify(dummy);
             try {
-                await dummyAsync();
+                result = await dummyAsync();
             } catch (e) {
                 result = e;
             }
 
-            expect(result).toBe(42);
+            expect(result).to.equal(42);
         });
 
         it('should pass through params to delegate', async() => {
@@ -97,13 +95,13 @@ describe('async', () => {
                 }, 50);
             }
             const blah = {
-                dummy: async.asyncify(dummy)
+                dummy: async.asyncify(dummy),
             };
-            const spy = spyOn(blah, 'dummy').and.callThrough();
+            const spy = sinon.spy(blah, 'dummy');
 
             await async.asAsync(spy, 1, 2, 3);
 
-            expect(spy).toHaveBeenCalledWith(1, 2, 3, jasmine.any(Function));
+            expect(spy.calledWith(1, 2, 3, sinon.match.func));
         });
     });
 });
