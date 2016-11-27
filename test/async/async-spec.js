@@ -1,14 +1,15 @@
-import { describe, it, expect, sinon } from '../.test-env';
+import sinon from 'sinon';
+import {describe} from 'ava-spec';
 import * as async from '../../lib/async/async';
 
-describe('async', () => {
-    it('should define a couple functions', () => {
-        expect(async.asyncify).to.be.ok();
-        expect(async.asAsync).to.be.ok();
+describe('async', it => {
+    it('should define a couple functions', t => {
+        t.truthy(async.asyncify);
+        t.truthy(async.asAsync);
     });
 
-    describe('asAsync', () => {
-        it('should return "success" value async', async() => {
+    describe('asAsync', it => {
+        it('should return "success" value async', async t => {
             function dummy(done) {
                 setTimeout(() => {
                     done(null, 42);
@@ -17,10 +18,10 @@ describe('async', () => {
 
             const result = await async.asAsync(dummy);
 
-            expect(result).to.equal(42);
+            t.deepEqual(result, 42);
         });
 
-        it('should throw "failure" value async', async() => {
+        it('should throw "failure" value async', async t => {
             function dummy(done) {
                 setTimeout(() => {
                     done(42);
@@ -35,10 +36,10 @@ describe('async', () => {
                 result = e;
             }
 
-            expect(result).to.equal(42);
+            t.deepEqual(result, 42);
         });
 
-        it('should pass through params to delegate', async() => {
+        it('should pass through params to delegate', async t => {
             const blah = {
                 dummy(a, b, c, done) {
                     setTimeout(() => {
@@ -51,12 +52,12 @@ describe('async', () => {
 
             await async.asAsync(spy, 1, 2, 3);
 
-            expect(spy.calledWith(1, 2, 3, sinon.match.func));
+            t.true(spy.calledWith(1, 2, 3, sinon.match.func));
         });
     });
 
-    describe('asyncify', () => {
-        it('should return "success" value async', async() => {
+    describe('asyncify', it => {
+        it('should return "success" value async', async t => {
             function dummy(done) {
                 setTimeout(() => {
                     done(null, 42);
@@ -67,10 +68,10 @@ describe('async', () => {
 
             const result = await dummyAsync();
 
-            expect(result).to.equal(42);
+            t.deepEqual(result, 42);
         });
 
-        it('should throw "failure" value async', async() => {
+        it('should throw "failure" value async', async t => {
             function dummy(done) {
                 setTimeout(() => {
                     done(42);
@@ -85,10 +86,10 @@ describe('async', () => {
                 result = e;
             }
 
-            expect(result).to.equal(42);
+            t.deepEqual(result, 42);
         });
 
-        it('should pass through params to delegate', async() => {
+        it('should pass through params to delegate', async t => {
             function dummy(a, b, c, done) {
                 setTimeout(() => {
                     done(null, 42);
@@ -101,7 +102,7 @@ describe('async', () => {
 
             await async.asAsync(spy, 1, 2, 3);
 
-            expect(spy.calledWith(1, 2, 3, sinon.match.func));
+            t.true(spy.calledWith(1, 2, 3, sinon.match.func));
         });
     });
 });

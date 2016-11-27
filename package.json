@@ -6,9 +6,34 @@
   "scripts": {
     "dev": "babel-node index",
     "lint": "eslint ./**/*.js --fix",
-    "test:cover": "babel-istanbul cover node_modules/mocha/bin/mocha ./test/**/*-spec.js",
-    "pretest": "npm run lint",
-    "test": "mocha ./test/**/*-spec.js"
+    "test:cover": "",
+    "xxpretest": "npm run lint",
+    "test": "nyc --all ava"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]  },
+  "nyc": {
+    "exclude": ["**/test/**/*.js", "**/coverage/**/*.js"],
+    "all": true,
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "check-coverage": true
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ],
+    "plugins": ["transform-runtime"],
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      }
+    }
   },
   "author": "",
   "license": "ISC",
@@ -17,21 +42,17 @@
     "yargs": "6.2.0"
   },
   "devDependencies": {
+    "ava": "0.17.0",
+    "ava-spec": "1.0.1",
     "babel-cli": "^6.16.0",
-    "babel-istanbul": "0.11.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
-    "chai": "3.5.0",
-    "dirty-chai": "1.2.2",
     "eslint": "^3.8.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jasmine": "^1.8.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-mocha": "4.7.0",
     "eslint-plugin-react": "^6.4.1",
-    "istanbul": "0.4.5",
-    "mocha": "3.2.0",
+    "nyc": "10.0.0",
     "sinon": "1.17.6"
   }
 }
