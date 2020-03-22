@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "moment": "2.19.3",
-    "yargs": "6.2.0"
+    "yargs": "13.1.0"
   }
 }
